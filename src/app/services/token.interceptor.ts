@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.services';
 import Swal from 'sweetalert2';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
@@ -23,12 +19,10 @@ export class TokenInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('🔑 Token added to request:', req.url);
     }
     
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
-        // Handle 401 Unauthorized (token expired or invalid)
         if (error.status === 401) {
           const message = error.error?.message || 'Your session has expired. Please login again.';
           
@@ -39,7 +33,9 @@ export class TokenInterceptor implements HttpInterceptor {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'OK'
           }).then(() => {
-            this.authService.logout();
+            // Gamitin ang expireSession — hindi logout
+            // para hindi lumabas ang "Logged Out" message
+            this.authService.expireSession();
           });
         }
         return throwError(() => error);

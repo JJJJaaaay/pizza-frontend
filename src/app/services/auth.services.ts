@@ -13,7 +13,6 @@ export class AuthService {
   
   private TOKEN_KEY = 'jwt_token';
   private USER_KEY = 'user_data';
-  private EXPIRY_KEY = 'token_expiry';
   
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -50,6 +49,7 @@ export class AuthService {
       );
   }
 
+  // Manual logout — may Swal message, para sa logout button
   logout(): void {
     Swal.fire({
       title: 'Logged Out',
@@ -63,6 +63,12 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  // Session expiry — walang Swal, para sa interceptor at guard
+  expireSession(): void {
+    this.destroySession();
+    this.router.navigate(['/login']);
+  }
+
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
@@ -70,25 +76,26 @@ export class AuthService {
   isLoggedIn(): boolean {
     const token = this.getToken();
     if (!token) return false;
-    
-    const expiry = localStorage.getItem(this.EXPIRY_KEY);
-    if (expiry && new Date(expiry) < new Date()) {
+
+    try {
+      // Decode JWT payload directly — hindi na kailangan ng stored expiry
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp * 1000; // Convert to milliseconds
+
+      if (Date.now() >= expiry) {
+        this.destroySession();
+        return false;
+      }
+      return true;
+    } catch {
       this.destroySession();
       return false;
     }
-    return true;
   }
 
   getCurrentUser(): User | null {
     const userStr = localStorage.getItem(this.USER_KEY);
     return userStr ? JSON.parse(userStr) : null;
-  }
-
-  getSessionRemaining(): number {
-    const expiry = localStorage.getItem(this.EXPIRY_KEY);
-    if (!expiry) return 0;
-    const remaining = new Date(expiry).getTime() - new Date().getTime();
-    return Math.max(0, Math.floor(remaining / 60000));
   }
 
   hasRole(role: string): boolean {
@@ -107,7 +114,6 @@ export class AuthService {
       isActive: true
     };
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-    localStorage.setItem(this.EXPIRY_KEY, new Date(authResult.expiresAt).toISOString());
     
     this.currentUserSubject.next(user);
     this.isAuthenticatedSubject.next(true);
@@ -116,7 +122,6 @@ export class AuthService {
   private destroySession(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
-    localStorage.removeItem(this.EXPIRY_KEY);
     this.currentUserSubject.next(null);
     this.isAuthenticatedSubject.next(false);
   }

@@ -15,7 +15,8 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Show Swal then redirect — no query params exposed in URL
+    // Gamitin ang expireSession — hindi logout
+    // para hindi lumabas ang "Logged Out" message
     Swal.fire({
       title: 'Session Expired',
       text: 'Your session has expired. Please login again.',
@@ -23,7 +24,7 @@ export class AuthGuard implements CanActivate {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'OK'
     }).then(() => {
-      this.router.navigate(['/login']);
+      this.authService.expireSession();
     });
 
     return false;
