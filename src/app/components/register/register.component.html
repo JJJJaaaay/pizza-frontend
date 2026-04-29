@@ -1,0 +1,177 @@
+<div class="login-wrapper">
+  <div class="animated-bg">
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+    <div class="pizza-particle"></div>
+  </div>
+
+  <div class="login-container animate-slide-up">
+    <div class="login-card">
+      <!-- Brand Section -->
+      <div class="brand-section">
+        <div class="logo-wrapper animate-bounce-in">
+          <div class="pizza-logo">🍕</div>
+        </div>
+        <h1 class="brand-title">Join <span class="highlight">Chel's Pizza</span></h1>
+        <p class="brand-subtitle animate-fade-in-delay">Create your account and start managing</p>
+      </div>
+
+      <!-- Decorative Divider -->
+      <div class="divider animate-fade-in-delay">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✦</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- Form Section -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
+        
+        <!-- Username Field -->
+        <div class="input-group animate-slide-in-left">
+          <div class="input-icon">
+            <i class="pi pi-user"></i>
+          </div>
+          <div class="input-field">
+            <input 
+              type="text" 
+              pInputText 
+              formControlName="username" 
+              placeholder=" " 
+              class="modern-input"
+              [class.ng-invalid]="submitted && f['username'].invalid">
+            <label>Username</label>
+          </div>
+        </div>
+        <div class="error-message animate-fade-in" *ngIf="submitted && f['username'].invalid">
+          <small *ngIf="f['username'].errors?.['required']">Username is required</small>
+          <small *ngIf="f['username'].errors?.['minlength']">Username must be at least 3 characters</small>
+          <small *ngIf="f['username'].errors?.['pattern']">Only letters, numbers, and underscore</small>
+        </div>
+
+        <!-- Email Field -->
+        <div class="input-group animate-slide-in-right">
+          <div class="input-icon">
+            <i class="pi pi-envelope"></i>
+          </div>
+          <div class="input-field">
+            <input 
+              type="email" 
+              pInputText 
+              formControlName="email" 
+              placeholder=" " 
+              class="modern-input"
+              [class.ng-invalid]="submitted && f['email'].invalid">
+            <label>Email Address</label>
+          </div>
+        </div>
+        <div class="error-message animate-fade-in" *ngIf="submitted && f['email'].invalid">
+          <small *ngIf="f['email'].errors?.['required']">Email is required</small>
+          <small *ngIf="f['email'].errors?.['email']">Enter a valid email address</small>
+        </div>
+
+        <!-- Password Field -->
+        <div class="input-group animate-slide-in-left">
+          <div class="input-icon">
+            <i class="pi pi-lock"></i>
+          </div>
+          <div class="input-field">
+            <input 
+              type="password" 
+              pInputText 
+              formControlName="password" 
+              placeholder=" " 
+              class="modern-input"
+              [class.ng-invalid]="submitted && f['password'].invalid">
+            <label>Password</label>
+          </div>
+        </div>
+        <div class="error-message animate-fade-in" *ngIf="submitted && f['password'].invalid">
+          <small *ngIf="f['password'].errors?.['required']">Password is required</small>
+          <small *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</small>
+          <small *ngIf="f['password'].errors?.['pattern']">Must contain uppercase, lowercase & number</small>
+        </div>
+
+        <!-- Password Strength Meter -->
+        <div class="password-strength-container animate-fade-in" *ngIf="f['password'].value && f['password'].dirty && f['password'].valid">
+          <div class="strength-label">Password Strength</div>
+          <div class="strength-bars">
+            <div class="strength-bar" [class.active]="getPasswordStrength() === 'weak' || getPasswordStrength() === 'medium' || getPasswordStrength() === 'strong'"></div>
+            <div class="strength-bar" [class.active]="getPasswordStrength() === 'medium' || getPasswordStrength() === 'strong'"></div>
+            <div class="strength-bar" [class.active]="getPasswordStrength() === 'strong'"></div>
+          </div>
+          <div class="strength-text" [class.weak]="getPasswordStrength() === 'weak'"
+                                     [class.medium]="getPasswordStrength() === 'medium'"
+                                     [class.strong]="getPasswordStrength() === 'strong'">
+            {{ getPasswordStrengthText() }}
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="input-group animate-slide-in-right">
+          <div class="input-icon">
+            <i class="pi pi-check-circle"></i>
+          </div>
+          <div class="input-field">
+            <input 
+              type="password" 
+              pInputText 
+              formControlName="confirmPassword" 
+              placeholder=" " 
+              class="modern-input"
+              [class.ng-invalid]="submitted && (f['confirmPassword'].invalid || registerForm.errors?.['mismatch'])">
+            <label>Confirm Password</label>
+          </div>
+        </div>
+        <div class="error-message animate-fade-in" *ngIf="submitted && (f['confirmPassword'].invalid || registerForm.errors?.['mismatch'])">
+          <small *ngIf="f['confirmPassword'].errors?.['required']">Please confirm your password</small>
+          <small *ngIf="registerForm.errors?.['mismatch']">Passwords do not match</small>
+        </div>
+
+        <!-- Password Requirements Checklist -->
+        <div class="password-checklist animate-fade-in" *ngIf="f['password'].dirty && !f['password'].valid">
+          <div class="checklist-title">Password must contain:</div>
+          <div class="checklist-items">
+            <div class="checklist-item" [class.valid]="hasMinLength()" [class.invalid]="!hasMinLength()">
+              <i class="pi" [class.pi-check-circle]="hasMinLength()" [class.pi-times-circle]="!hasMinLength()"></i>
+              <span>At least 6 characters</span>
+            </div>
+            <div class="checklist-item" [class.valid]="hasLowercase()" [class.invalid]="!hasLowercase()">
+              <i class="pi" [class.pi-check-circle]="hasLowercase()" [class.pi-times-circle]="!hasLowercase()"></i>
+              <span>One lowercase letter</span>
+            </div>
+            <div class="checklist-item" [class.valid]="hasUppercase()" [class.invalid]="!hasUppercase()">
+              <i class="pi" [class.pi-check-circle]="hasUppercase()" [class.pi-times-circle]="!hasUppercase()"></i>
+              <span>One uppercase letter</span>
+            </div>
+            <div class="checklist-item" [class.valid]="hasNumber()" [class.invalid]="!hasNumber()">
+              <i class="pi" [class.pi-check-circle]="hasNumber()" [class.pi-times-circle]="!hasNumber()"></i>
+              <span>One number</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          pButton 
+          type="submit" 
+          label="Create Account" 
+          [loading]="loading"
+          class="login-btn animate-scale"
+          [disabled]="loading">
+          <span class="btn-text">Create Account</span>
+          <span class="btn-icon">→</span>
+        </button>
+
+        <!-- Login Link -->
+        <div class="register-section animate-fade-in-delay2">
+          <p>Already have an account?</p>
+          <a routerLink="/login" class="register-link-btn">Sign In Here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

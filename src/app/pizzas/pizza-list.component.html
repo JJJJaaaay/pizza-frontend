@@ -1,0 +1,237 @@
+<div class="page-card">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h2 class="page-title">
+      <span>🍕</span> Pizza Menu
+    </h2>
+    <p-button label="Add Pizza" icon="pi pi-plus" (onClick)="openCreateDialog()" size="small"></p-button>
+  </div>
+
+  <!-- Desktop Table -->
+  <div class="desktop-table">
+    <p-table
+      [value]="pizzas"
+      [loading]="loading"
+      responsiveLayout="scroll"
+      styleClass="p-datatable-gridlines p-datatable-sm"
+      [rowHover]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:80px">Image</th>
+          <th style="width:160px">Name</th>
+          <th>Description</th>
+          <th style="width:85px">Size</th>
+          <th style="width:100px">Price</th>
+          <th>Ingredients</th>
+          <th style="width:90px">Available</th>
+          <th style="width:120px">Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pizza>
+        <tr>
+          <td>
+            <img *ngIf="pizza.imageUrl" 
+                 [src]="pizza.imageUrl" 
+                 style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;"
+                 (error)="pizza.imageUrl = ''">
+            <div *ngIf="!pizza.imageUrl" 
+                 style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+              🍕
+            </div>
+          </td>
+          <td><strong>{{ pizza.name }}</strong></td>
+          <td style="color:#aaa;font-size:0.88rem;">{{ pizza.description || '—' }}</td>
+          <td>
+            <p-tag [value]="pizza.size" [severity]="getSizeSeverity(pizza.size)"></p-tag>
+          </td>
+          <td><strong style="color:#f7c948;">₱{{ pizza.price | number:'1.2-2' }}</strong></td>
+          <td>
+            <ng-container *ngIf="pizza.pizzaIngredients?.length; else noIngD">
+              <p-chip *ngFor="let pi of pizza.pizzaIngredients"
+                [label]="pi.ingredient.name + ' · ' + pi.quantity + pi.ingredient.unit"
+                styleClass="mr-1 mb-1"></p-chip>
+            </ng-container>
+            <ng-template #noIngD>
+              <span style="color:#555;font-style:italic;">No ingredients yet</span>
+            </ng-template>
+          </td>
+          <td>
+            <p-inputSwitch [(ngModel)]="pizza.isAvailable" (onChange)="toggleAvailability(pizza)"></p-inputSwitch>
+          </td>
+          <td>
+            <div class="flex gap-1">
+              <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" size="small"
+                pTooltip="Edit" (onClick)="openEditDialog(pizza)"></p-button>
+              <p-button icon="pi pi-tag" [rounded]="true" [text]="true" severity="success" size="small"
+                pTooltip="Manage Ingredients" (onClick)="openIngredientManager(pizza)"></p-button>
+              <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" size="small"
+                pTooltip="Delete" (onClick)="confirmDelete(pizza)"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align:center;padding:3rem;color:#555;">
+            No pizzas found. Click <strong>Add Pizza</strong> to get started!
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- Mobile Card List -->
+  <div class="mobile-list">
+    <div *ngIf="loading" style="text-align:center;padding:2rem;color:#666;">
+      <i class="pi pi-spin pi-spinner" style="font-size:1.5rem"></i>
+    </div>
+    <div *ngIf="!loading && pizzas.length === 0" style="text-align:center;padding:2rem;color:#555;">
+      No pizzas yet. Tap <strong>Add Pizza</strong>!
+    </div>
+    <div class="pizza-card" *ngFor="let pizza of pizzas">
+      <div class="pizza-card-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img *ngIf="pizza.imageUrl" 
+               [src]="pizza.imageUrl" 
+               style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;"
+               (error)="pizza.imageUrl = ''">
+          <div *ngIf="!pizza.imageUrl" 
+               style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+            🍕
+          </div>
+          <span class="pizza-card-name">{{ pizza.name }}</span>
+        </div>
+        <span class="pizza-card-price">₱{{ pizza.price | number:'1.2-2' }}</span>
+      </div>
+      <div class="pizza-card-desc" *ngIf="pizza.description">{{ pizza.description }}</div>
+      <div class="pizza-card-meta">
+        <p-tag [value]="pizza.size" [severity]="getSizeSeverity(pizza.size)"></p-tag>
+        <p-tag [value]="pizza.isAvailable ? 'Available' : 'Unavailable'"
+               [severity]="pizza.isAvailable ? 'success' : 'danger'"></p-tag>
+      </div>
+      <div class="pizza-card-ingredients" *ngIf="pizza.pizzaIngredients?.length">
+        <p-chip *ngFor="let pi of pizza.pizzaIngredients"
+          [label]="pi.ingredient.name + ' · ' + pi.quantity + pi.ingredient.unit"></p-chip>
+      </div>
+      <div *ngIf="!pizza.pizzaIngredients?.length"
+           style="color:#555;font-style:italic;font-size:0.85rem;margin-bottom:0.7rem;">
+        No ingredients yet
+      </div>
+      <div class="pizza-card-footer">
+        <p-inputSwitch [(ngModel)]="pizza.isAvailable" (onChange)="toggleAvailability(pizza)"></p-inputSwitch>
+        <div class="card-actions">
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info"
+            (onClick)="openEditDialog(pizza)"></p-button>
+          <p-button icon="pi pi-tag" [rounded]="true" [text]="true" severity="success"
+            (onClick)="openIngredientManager(pizza)"></p-button>
+          <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"
+            (onClick)="confirmDelete(pizza)"></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pizza Form Dialog -->
+<p-dialog [(visible)]="pizzaDialogVisible"
+  [header]="editMode ? '✏️ Edit Pizza' : '🍕 New Pizza'"
+  [modal]="true" [draggable]="false" [style]="{ width: '550px' }">
+  <div class="flex flex-column gap-3">
+    <div>
+      <label class="field-label">Name *</label>
+      <input pInputText [(ngModel)]="form.name" class="w-full" placeholder="e.g. Hawaiian Supreme" />
+    </div>
+    <div>
+      <label class="field-label">Description</label>
+      <textarea pInputTextarea [(ngModel)]="form.description" rows="3" class="w-full"
+        placeholder="Short description..."></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+      <div>
+        <label class="field-label">Price (₱) *</label>
+        <p-inputNumber [(ngModel)]="form.price" mode="decimal"
+          [minFractionDigits]="2" [maxFractionDigits]="2" [min]="0" class="w-full"></p-inputNumber>
+      </div>
+      <div>
+        <label class="field-label">Size</label>
+        <p-dropdown [(ngModel)]="form.size" [options]="sizes" class="w-full" appendTo="body"></p-dropdown>
+      </div>
+    </div>
+    
+    <!-- Image URL Field -->
+    <div>
+      <label class="field-label">Image URL</label>
+      <div class="flex gap-2 align-items-center">
+        <input pInputText [(ngModel)]="form.imageUrl" class="w-full" placeholder="https://example.com/pizza.jpg" />
+        <div *ngIf="form.imageUrl" style="width: 50px; height: 50px;">
+          <img [src]="form.imageUrl" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" 
+               (error)="form.imageUrl = ''">
+        </div>
+      </div>
+      <small style="color:#666;">Enter a valid image URL from the web</small>
+    </div>
+
+    <!-- Preview -->
+    <div *ngIf="form.imageUrl" class="preview-image">
+      <label class="field-label">Preview</label>
+      <img [src]="form.imageUrl" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;"
+           (error)="form.imageUrl = ''">
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" severity="secondary" [text]="true" (onClick)="pizzaDialogVisible = false"></p-button>
+    <p-button [label]="editMode ? 'Update Pizza' : 'Create Pizza'" icon="pi pi-check" (onClick)="savePizza()"></p-button>
+  </ng-template>
+</p-dialog>
+
+<!-- Ingredient Manager Dialog -->
+<p-dialog [(visible)]="ingDialogVisible"
+  [header]="'🧀 ' + (selectedPizza?.name ?? '')"
+  [modal]="true" [draggable]="false" [style]="{ width: '600px' }">
+  <div>
+    <div style="margin-bottom:1rem;">
+      <label class="field-label" style="display:block;margin-bottom:0.6rem;">Current Ingredients</label>
+      <div class="flex flex-wrap gap-2">
+        <p-chip *ngFor="let pi of selectedPizza?.pizzaIngredients"
+          [label]="pi.ingredient.name + ' · ' + pi.quantity + pi.ingredient.unit"
+          [removable]="true" (onRemove)="removeIngredient(pi.ingredientId)"></p-chip>
+        <span *ngIf="!selectedPizza?.pizzaIngredients?.length"
+              style="color:#555;font-style:italic;font-size:0.9rem;">
+          No ingredients added yet.
+        </span>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <div>
+      <label class="field-label" style="display:block;margin-bottom:0.8rem;">Add Ingredient</label>
+      <div class="flex gap-2 align-items-end">
+        <div style="flex:2;">
+          <label class="field-label">Ingredient</label>
+          <p-dropdown [(ngModel)]="newIngredientId"
+            [options]="availableIngredients" optionLabel="name" optionValue="id"
+            placeholder="Select an ingredient..." class="w-full"
+            [filter]="true" filterPlaceholder="Search ingredient"
+            [showClear]="true" appendTo="body">
+          </p-dropdown>
+        </div>
+        <div style="flex:1;">
+          <label class="field-label">Quantity</label>
+          <p-inputNumber [(ngModel)]="newQuantity" [min]="1" [max]="9999" class="w-full"></p-inputNumber>
+        </div>
+        <div>
+          <p-button label="Add" icon="pi pi-plus" (onClick)="addIngredient()"></p-button>
+        </div>
+      </div>
+      <small style="color:#666;margin-top:0.4rem;display:block;">
+        Only active ingredients not yet added are shown.
+      </small>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Done" icon="pi pi-check" (onClick)="ingDialogVisible = false"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>

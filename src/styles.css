@@ -1,0 +1,306 @@
+/* ===== GLOBAL STYLES ===== */
+:root {
+  --pizza-red: #e63946;
+  --pizza-orange: #f4a261;
+  --pizza-cheese: #f7c948;
+  --bg-dark: #0f0f1a;
+  --bg-surface: #1a1a2e;
+  --bg-card: #16213e;
+  --text-muted: #8888aa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #eee;
+}
+
+/* ===== NAVBAR ===== */
+.pizza-navbar {
+  background: linear-gradient(90deg, #0f0f1a 0%, #1a1a2e 60%, #2a0a0a 100%) !important;
+  border-bottom: 2px solid var(--pizza-red) !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-right: 1.5rem;
+  text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-content {
+  max-width: 1280px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* ===== PAGE CARD ===== */
+.page-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 1.2rem;
+  border: 1px solid rgba(230, 57, 70, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  gap: 0.5rem;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===== FORM FIELDS ===== */
+.field-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+/* ===== MOBILE CARD VIEW (hidden on desktop) ===== */
+.mobile-list { display: none; }
+.desktop-table { display: block; }
+
+.pizza-card, .ingredient-card {
+  background: var(--bg-surface);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.pizza-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.6rem;
+}
+
+.pizza-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pizza-card-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pizza-cheese);
+}
+
+.pizza-card-desc {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 0.6rem;
+}
+
+.pizza-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.pizza-card-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.pizza-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.ing-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.ing-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.ing-card-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.ing-card-stock {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* ===== PRIMENG OVERRIDES ===== */
+.p-datatable .p-datatable-thead > tr > th {
+  background: rgba(230, 57, 70, 0.12) !important;
+  color: var(--pizza-orange) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.8px;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background: var(--bg-card) !important;
+  border-color: rgba(255,255,255,0.05) !important;
+  transition: background 0.15s;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: rgba(230, 57, 70, 0.07) !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: var(--bg-surface) !important;
+  border-bottom: 2px solid var(--pizza-red) !important;
+  padding: 1rem 1.2rem !important;
+}
+
+.p-dialog .p-dialog-content {
+  background: var(--bg-surface) !important;
+  padding: 1rem 1.2rem !important;
+}
+
+.p-dialog .p-dialog-footer {
+  background: var(--bg-surface) !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  padding: 0.8rem 1.2rem !important;
+}
+
+.p-menubar {
+  border-radius: 0 !important;
+}
+
+.p-chip {
+  font-size: 0.78rem !important;
+  padding: 0.2rem 0.6rem !important;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+@media (max-width: 768px) {
+  .main-content {
+    margin: 0.8rem auto;
+    padding: 0 0.6rem;
+  }
+
+  .page-card {
+    padding: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .page-title {
+    font-size: 1.1rem;
+  }
+
+  /* Switch table → cards on mobile */
+  .mobile-list  { display: block; }
+  .desktop-table { display: none !important; }
+
+  /* Full-width dialogs on mobile */
+  .p-dialog {
+    width: 96vw !important;
+    max-width: 96vw !important;
+    margin: 0 !important;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding: 0.8rem !important;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  /* Stack the add-ingredient row vertically on mobile */
+  .ing-add-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .ing-add-row > div {
+    flex: unset !important;
+    width: 100% !important;
+  }
+
+  /* Price+size grid → stack */
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .nav-brand {
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.stock-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.out-of-stock-badge {
+  background: #f44336;
+  color: white;
+}
+
+.low-stock-badge {
+  background: #ff9800;
+  color: white;
+}
+/* Logout button styles */
+.logout-btn .p-button-label {
+  font-weight: 500;
+}
+
+.username-badge {
+  background: rgba(244, 162, 97, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,506 @@
+/* Wrapper with animated background */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Animated Background Particles */
+.animated-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pizza-particle {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  animation: float 20s infinite linear;
+}
+
+.pizza-particle:nth-child(1) { top: 10%; left: 10%; animation-duration: 15s; animation-delay: 0s; }
+.pizza-particle:nth-child(2) { top: 70%; left: 85%; animation-duration: 18s; animation-delay: 2s; }
+.pizza-particle:nth-child(3) { top: 50%; left: 20%; animation-duration: 12s; animation-delay: 4s; }
+.pizza-particle:nth-child(4) { top: 80%; left: 40%; animation-duration: 20s; animation-delay: 1s; }
+.pizza-particle:nth-child(5) { top: 20%; left: 75%; animation-duration: 16s; animation-delay: 3s; }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.1; }
+  50% { transform: translateY(-100px) rotate(180deg); opacity: 0.2; }
+  100% { transform: translateY(0) rotate(360deg); opacity: 0.1; }
+}
+
+/* Main Container */
+.login-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 1rem;
+  z-index: 1;
+}
+
+/* Card */
+.login-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 32px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Brand Section */
+.brand-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-wrapper {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.pizza-logo {
+  font-size: 4rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.brand-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-title .highlight {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ddd, transparent);
+}
+
+.divider-icon {
+  color: #764ba2;
+  font-size: 0.8rem;
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Modern Input Group */
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.input-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.input-icon i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.input-field {
+  flex: 1;
+  position: relative;
+}
+
+.modern-input {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.modern-input:focus {
+  border-bottom-color: #764ba2;
+}
+
+.modern-input:focus + label,
+.modern-input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.75rem;
+  color: #764ba2;
+}
+
+.input-field label {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  color: #999;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Login Options */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #666;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  border-color: #764ba2;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #764ba2;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-text {
+  margin-left: 0.5rem;
+}
+
+.forgot-link {
+  color: #764ba2;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.forgot-link:hover {
+  color: #667eea;
+}
+
+/* Login Button */
+.login-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+}
+
+.login-btn .btn-text {
+  margin-right: 0.5rem;
+}
+
+.login-btn .btn-icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.login-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* Register Section */
+.register-section {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.register-section p {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.register-link-btn {
+  background: transparent;
+  color: #764ba2;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.register-link-btn:hover {
+  color: #667eea;
+  transform: translateX(5px);
+}
+
+/* Animations */
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.8s ease-out 0.3s backwards;
+}
+
+.animate-fade-in-delay2 {
+  animation: fadeIn 0.8s ease-out 0.6s backwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out 0.2s backwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out 0.4s backwards;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-scale {
+  animation: scaleIn 0.6s ease-out 0.5s backwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.5rem;
+  }
+  
+  .brand-title {
+    font-size: 1.5rem;
+  }
+  
+  .pizza-logo {
+    font-size: 3rem;
+  }
+  
+  .input-group {
+    gap: 0.5rem;
+  }
+  
+  .input-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Add this to both CSS files - Fix for visible text */
+
+/* Make input text dark/visible */
+.modern-input {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  background: transparent;
+  transition: all 0.3s ease;
+  color: #333;  /* ← ADD THIS - makes text dark */
+}
+
+/* Make placeholder text visible */
+.modern-input::placeholder {
+  color: transparent;
+}
+
+/* When typing, text is dark */
+.modern-input:focus {
+  border-bottom-color: #764ba2;
+  color: #333;  /* ← ADD THIS */
+}
+
+/* Make label text dark when not focused */
+.input-field label {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  color: #999;  /* ← This is fine - label color */
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* When label moves up, make it colored */
+.modern-input:focus + label,
+.modern-input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.75rem;
+  color: #764ba2;  /* ← Purple when active */
+}
+
+/* Fix for autofill background */
+.modern-input:-webkit-autofill,
+.modern-input:-webkit-autofill:hover,
+.modern-input:-webkit-autofill:focus,
+.modern-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #333 !important;
+}
