@@ -2,12 +2,12 @@
   "name": "pizza-frontend",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "build:prod": "ng build --configuration production"
-  },
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build --configuration production",
+  "build:prod": "ng build --configuration production",
+  "watch": "ng build --watch --configuration development"
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.0",
