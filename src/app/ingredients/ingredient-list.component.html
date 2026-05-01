@@ -1,6 +1,6 @@
 <div class="page-card">
 
-  <!-- Header -->
+  
   <div class="page-header">
     <h2 class="page-title">
       <span>🧄</span> Ingredients
@@ -8,7 +8,7 @@
     <p-button label="Add Ingredient" icon="pi pi-plus" (onClick)="openCreateDialog()" size="small"></p-button>
   </div>
 
-  <!-- ===== DESKTOP TABLE ===== -->
+  
   <div class="desktop-table">
     <p-table [value]="ingredients" [loading]="loading"
       responsiveLayout="scroll" styleClass="p-datatable-gridlines p-datatable-sm" [rowHover]="true">
@@ -26,7 +26,7 @@
   <tr>
     <td>
       <strong>{{ ing.name }}</strong>
-      <!-- Stock Warning Badges -->
+      
       <span *ngIf="ing.stockQuantity === 0" style="display: inline-block; margin-left: 8px; padding: 2px 8px; background: #f44336; color: white; border-radius: 12px; font-size: 10px; font-weight: bold;">
         ❌ OUT OF STOCK
       </span>
@@ -41,12 +41,12 @@
       <p-tag [value]="ing.category" [severity]="getCategorySeverity(ing.category)"></p-tag>
     </td>
     <td>
-      <!-- Stock quantity with color coding -->
+      
       <span [style.color]="ing.stockQuantity === 0 ? '#f44336' : (ing.stockQuantity < 50 ? '#ff9800' : (ing.stockQuantity < 100 ? '#2196f3' : '#aaa'))" 
             [style.fontWeight]="ing.stockQuantity < 100 ? 'bold' : 'normal'">
         {{ ing.stockQuantity | number }}
       </span>
-      <!-- Stock status messages -->
+      
       <span *ngIf="ing.stockQuantity === 0" style="color:#f44336; margin-left: 0.3rem; font-weight: bold;">
         ⚠️ NOT ENOUGH STOCK!
       </span>
@@ -85,7 +85,7 @@
     </p-table>
   </div>
 
-  <!-- ===== MOBILE CARD LIST ===== -->
+  
   <div class="mobile-list">
     <div *ngIf="loading" style="text-align:center;padding:2rem;color:#666;">
       <i class="pi pi-spin pi-spinner" style="font-size:1.5rem"></i>
@@ -118,7 +118,7 @@
   </div>
 </div>
 
-<!-- ===== Ingredient Form Dialog ===== -->
+
 <p-dialog [(visible)]="dialogVisible"
   [header]="editMode ? '✏️ Edit Ingredient' : '🧄 New Ingredient'"
   [modal]="true" [draggable]="false" [style]="{ width: '460px' }">

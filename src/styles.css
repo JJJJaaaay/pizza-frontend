@@ -1,4 +1,4 @@
-/* ===== GLOBAL STYLES ===== */
+
 :root {
   --pizza-red: #e63946;
   --pizza-orange: #f4a261;
@@ -19,7 +19,7 @@ body {
   color: #eee;
 }
 
-/* ===== NAVBAR ===== */
+
 .pizza-navbar {
   background: linear-gradient(90deg, #0f0f1a 0%, #1a1a2e 60%, #2a0a0a 100%) !important;
   border-bottom: 2px solid var(--pizza-red) !important;
@@ -36,14 +36,14 @@ body {
   text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
 }
 
-/* ===== MAIN LAYOUT ===== */
+
 .main-content {
   max-width: 1280px;
   margin: 1.5rem auto;
   padding: 0 1rem;
 }
 
-/* ===== PAGE CARD ===== */
+
 .page-card {
   background: var(--bg-card);
   border-radius: 14px;
@@ -72,7 +72,7 @@ body {
   gap: 0.5rem;
 }
 
-/* ===== FORM FIELDS ===== */
+
 .field-label {
   display: block;
   font-size: 0.82rem;
@@ -83,7 +83,7 @@ body {
   margin-bottom: 0.4rem;
 }
 
-/* ===== MOBILE CARD VIEW (hidden on desktop) ===== */
+
 .mobile-list { display: none; }
 .desktop-table { display: block; }
 
@@ -173,7 +173,7 @@ body {
   color: #aaa;
 }
 
-/* ===== PRIMENG OVERRIDES ===== */
+
 .p-datatable .p-datatable-thead > tr > th {
   background: rgba(230, 57, 70, 0.12) !important;
   color: var(--pizza-orange) !important;
@@ -220,7 +220,7 @@ body {
   padding: 0.2rem 0.6rem !important;
 }
 
-/* ===== RESPONSIVE BREAKPOINTS ===== */
+
 @media (max-width: 768px) {
   .main-content {
     margin: 0.8rem auto;
@@ -236,11 +236,11 @@ body {
     font-size: 1.1rem;
   }
 
-  /* Switch table → cards on mobile */
+  
   .mobile-list  { display: block; }
   .desktop-table { display: none !important; }
 
-  /* Full-width dialogs on mobile */
+  
   .p-dialog {
     width: 96vw !important;
     max-width: 96vw !important;
@@ -253,7 +253,7 @@ body {
     overflow-y: auto;
   }
 
-  /* Stack the add-ingredient row vertically on mobile */
+  
   .ing-add-row {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -264,7 +264,7 @@ body {
     width: 100% !important;
   }
 
-  /* Price+size grid → stack */
+  
   .form-grid-2 {
     grid-template-columns: 1fr !important;
   }
@@ -293,7 +293,7 @@ body {
   background: #ff9800;
   color: white;
 }
-/* Logout button styles */
+
 .logout-btn .p-button-label {
   font-weight: 500;
 }

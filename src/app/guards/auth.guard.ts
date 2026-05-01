@@ -15,8 +15,8 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Gamitin ang expireSession — hindi logout
-    // para hindi lumabas ang "Logged Out" message
+    
+    
     Swal.fire({
       title: 'Session Expired',
       text: 'Your session has expired. Please login again.',

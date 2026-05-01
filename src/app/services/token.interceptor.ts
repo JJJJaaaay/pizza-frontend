@@ -33,8 +33,8 @@ export class TokenInterceptor implements HttpInterceptor {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'OK'
           }).then(() => {
-            // Gamitin ang expireSession — hindi logout
-            // para hindi lumabas ang "Logged Out" message
+            
+            
             this.authService.expireSession();
           });
         }

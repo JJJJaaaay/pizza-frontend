@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-// ── Models ──────────────────────────────────────────────────────────────────
+
 
 export interface Ingredient {
   id: number;
@@ -33,11 +33,11 @@ export interface Pizza {
   pizzaIngredients: PizzaIngredient[];
 }
 
-// ── Pizza Service ────────────────────────────────────────────────────────────
+
 
 @Injectable({ providedIn: 'root' })
 export class PizzaService {
-  private base = `${environment.apiUrl}/api/Pizzas`;  // ← Capital P
+  private base = `${environment.apiUrl}/api/Pizzas`;  
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Pizza[]> {
@@ -69,11 +69,11 @@ export class PizzaService {
   }
 }
 
-// ── Ingredient Service ───────────────────────────────────────────────────────
+
 
 @Injectable({ providedIn: 'root' })
 export class IngredientService {
-  private base = `${environment.apiUrl}/api/Ingredients`;  // ← Capital I
+  private base = `${environment.apiUrl}/api/Ingredients`;  
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Ingredient[]> {

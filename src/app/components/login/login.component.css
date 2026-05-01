@@ -1,4 +1,4 @@
-/* Wrapper with animated background */
+
 .login-wrapper {
   min-height: 100vh;
   display: flex;
@@ -9,7 +9,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Animated Background Particles */
+
 .animated-bg {
   position: absolute;
   width: 100%;
@@ -36,7 +36,7 @@
   100% { transform: translateY(0) rotate(360deg); opacity: 0.1; }
 }
 
-/* Main Container */
+
 .login-container {
   width: 100%;
   max-width: 480px;
@@ -44,7 +44,7 @@
   z-index: 1;
 }
 
-/* Card */
+
 .login-card {
   background: rgba(255, 255, 255, 0.98);
   border-radius: 32px;
@@ -58,7 +58,7 @@
   transform: translateY(-5px);
 }
 
-/* Brand Section */
+
 .brand-section {
   text-align: center;
   margin-bottom: 2rem;
@@ -101,7 +101,8 @@
   margin-top: 0.5rem;
 }
 
-/* Divider */
+
+
 .divider {
   display: flex;
   align-items: center;
@@ -121,14 +122,14 @@
   font-size: 0.8rem;
 }
 
-/* Form */
+
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Modern Input Group */
+
 .input-group {
   display: flex;
   align-items: center;
@@ -188,7 +189,7 @@
   transition: all 0.3s ease;
 }
 
-/* Login Options */
+
 .login-options {
   display: flex;
   justify-content: space-between;
@@ -265,7 +266,7 @@
   color: #667eea;
 }
 
-/* Login Button */
+
 .login-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   border: none !important;
@@ -296,7 +297,7 @@
   transform: translateX(5px);
 }
 
-/* Register Section */
+
 .register-section {
   text-align: center;
   margin-top: 1rem;
@@ -325,7 +326,7 @@
   transform: translateX(5px);
 }
 
-/* Animations */
+
 .animate-slide-up {
   animation: slideUp 0.6s ease-out;
 }
@@ -428,7 +429,7 @@
   }
 }
 
-/* Responsive */
+
 @media (max-width: 480px) {
   .login-card {
     padding: 1.5rem;
@@ -452,9 +453,9 @@
   }
 }
 
-/* Add this to both CSS files - Fix for visible text */
 
-/* Make input text dark/visible */
+
+
 .modern-input {
   width: 100%;
   padding: 12px 0;
@@ -464,39 +465,39 @@
   outline: none;
   background: transparent;
   transition: all 0.3s ease;
-  color: #333;  /* ← ADD THIS - makes text dark */
+  color: #333;  
 }
 
-/* Make placeholder text visible */
+
 .modern-input::placeholder {
   color: transparent;
 }
 
-/* When typing, text is dark */
+
 .modern-input:focus {
   border-bottom-color: #764ba2;
-  color: #333;  /* ← ADD THIS */
+  color: #333;  
 }
 
-/* Make label text dark when not focused */
+
 .input-field label {
   position: absolute;
   left: 0;
   bottom: 12px;
-  color: #999;  /* ← This is fine - label color */
+  color: #999;  
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
-/* When label moves up, make it colored */
+
 .modern-input:focus + label,
 .modern-input:not(:placeholder-shown) + label {
   transform: translateY(-20px);
   font-size: 0.75rem;
-  color: #764ba2;  /* ← Purple when active */
+  color: #764ba2;  
 }
 
-/* Fix for autofill background */
+
 .modern-input:-webkit-autofill,
 .modern-input:-webkit-autofill:hover,
 .modern-input:-webkit-autofill:focus,

@@ -49,7 +49,7 @@ export class AuthService {
       );
   }
 
-  // Manual logout — may Swal message, para sa logout button
+  
   logout(): void {
     Swal.fire({
       title: 'Logged Out',
@@ -63,7 +63,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Session expiry — walang Swal, para sa interceptor at guard
+  
   expireSession(): void {
     this.destroySession();
     this.router.navigate(['/login']);
@@ -78,9 +78,9 @@ export class AuthService {
     if (!token) return false;
 
     try {
-      // Decode JWT payload directly — hindi na kailangan ng stored expiry
+      
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const expiry = payload.exp * 1000; // Convert to milliseconds
+      const expiry = payload.exp * 1000; 
 
       if (Date.now() >= expiry) {
         this.destroySession();

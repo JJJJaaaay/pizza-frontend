@@ -1,6 +1,6 @@
 <div class="page-card">
 
-  <!-- Header -->
+  
   <div class="page-header">
     <h2 class="page-title">
       <span>🍕</span> Pizza Menu
@@ -8,7 +8,7 @@
     <p-button label="Add Pizza" icon="pi pi-plus" (onClick)="openCreateDialog()" size="small"></p-button>
   </div>
 
-  <!-- Desktop Table -->
+  
   <div class="desktop-table">
     <p-table
       [value]="pizzas"
@@ -81,7 +81,7 @@
     </p-table>
   </div>
 
-  <!-- Mobile Card List -->
+  
   <div class="mobile-list">
     <div *ngIf="loading" style="text-align:center;padding:2rem;color:#666;">
       <i class="pi pi-spin pi-spinner" style="font-size:1.5rem"></i>
@@ -133,7 +133,7 @@
   </div>
 </div>
 
-<!-- Pizza Form Dialog -->
+
 <p-dialog [(visible)]="pizzaDialogVisible"
   [header]="editMode ? '✏️ Edit Pizza' : '🍕 New Pizza'"
   [modal]="true" [draggable]="false" [style]="{ width: '550px' }">
@@ -159,7 +159,7 @@
       </div>
     </div>
     
-    <!-- Image URL Field -->
+    
     <div>
       <label class="field-label">Image URL</label>
       <div class="flex gap-2 align-items-center">
@@ -172,7 +172,7 @@
       <small style="color:#666;">Enter a valid image URL from the web</small>
     </div>
 
-    <!-- Preview -->
+    
     <div *ngIf="form.imageUrl" class="preview-image">
       <label class="field-label">Preview</label>
       <img [src]="form.imageUrl" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;"
@@ -185,7 +185,7 @@
   </ng-template>
 </p-dialog>
 
-<!-- Ingredient Manager Dialog -->
+
 <p-dialog [(visible)]="ingDialogVisible"
   [header]="'🧀 ' + (selectedPizza?.name ?? '')"
   [modal]="true" [draggable]="false" [style]="{ width: '600px' }">

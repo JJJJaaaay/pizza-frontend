@@ -53,7 +53,7 @@ export class AppComponent {
       const user = this.authService.getCurrentUser();
       this.username = user?.username || '';
       
-      // Update menu items based on login status
+      
       this.menuItems = [
         { label: 'Pizzas', icon: 'pi pi-home', routerLink: '/pizzas' },
         { label: 'Ingredients', icon: 'pi pi-list', routerLink: '/ingredients' },

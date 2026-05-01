@@ -79,7 +79,7 @@ export class IngredientListComponent implements OnInit {
     });
   }
 
-  // FIX: Add method to check stock status for styling
+  
   getStockSeverity(stock: number): "success" | "secondary" | "info" | "warning" | "danger" | "contrast" | undefined {
     if (stock <= 0) return 'danger';
     if (stock < 50) return 'warning';

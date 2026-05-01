@@ -11,7 +11,7 @@
 
   <div class="login-container animate-slide-up">
     <div class="login-card">
-      <!-- Brand Section -->
+      
       <div class="brand-section">
         <div class="logo-wrapper animate-bounce-in">
           <div class="pizza-logo">🍕</div>
@@ -20,17 +20,17 @@
         <p class="brand-subtitle animate-fade-in-delay">Create your account and start managing</p>
       </div>
 
-      <!-- Decorative Divider -->
+      
       <div class="divider animate-fade-in-delay">
         <span class="divider-line"></span>
         <span class="divider-icon">✦</span>
         <span class="divider-line"></span>
       </div>
 
-      <!-- Form Section -->
+      
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
         
-        <!-- Username Field -->
+        
         <div class="input-group animate-slide-in-left">
           <div class="input-icon">
             <i class="pi pi-user"></i>
@@ -52,7 +52,7 @@
           <small *ngIf="f['username'].errors?.['pattern']">Only letters, numbers, and underscore</small>
         </div>
 
-        <!-- Email Field -->
+        
         <div class="input-group animate-slide-in-right">
           <div class="input-icon">
             <i class="pi pi-envelope"></i>
@@ -73,7 +73,7 @@
           <small *ngIf="f['email'].errors?.['email']">Enter a valid email address</small>
         </div>
 
-        <!-- Password Field -->
+        
         <div class="input-group animate-slide-in-left">
           <div class="input-icon">
             <i class="pi pi-lock"></i>
@@ -95,7 +95,7 @@
           <small *ngIf="f['password'].errors?.['pattern']">Must contain uppercase, lowercase & number</small>
         </div>
 
-        <!-- Password Strength Meter -->
+        
         <div class="password-strength-container animate-fade-in" *ngIf="f['password'].value && f['password'].dirty && f['password'].valid">
           <div class="strength-label">Password Strength</div>
           <div class="strength-bars">
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <!-- Confirm Password Field -->
+        
         <div class="input-group animate-slide-in-right">
           <div class="input-icon">
             <i class="pi pi-check-circle"></i>
@@ -131,7 +131,7 @@
           <small *ngIf="registerForm.errors?.['mismatch']">Passwords do not match</small>
         </div>
 
-        <!-- Password Requirements Checklist -->
+        
         <div class="password-checklist animate-fade-in" *ngIf="f['password'].dirty && !f['password'].valid">
           <div class="checklist-title">Password must contain:</div>
           <div class="checklist-items">
@@ -154,7 +154,7 @@
           </div>
         </div>
 
-        <!-- Submit Button -->
+        
         <button 
           pButton 
           type="submit" 
@@ -166,7 +166,7 @@
           <span class="btn-icon">→</span>
         </button>
 
-        <!-- Login Link -->
+        
         <div class="register-section animate-fade-in-delay2">
           <p>Already have an account?</p>
           <a routerLink="/login" class="register-link-btn">Sign In Here</a>

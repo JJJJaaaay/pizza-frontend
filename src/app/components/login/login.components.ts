@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   ngOnInit(): void {
-    // If already logged in, go straight to pizzas
+    
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/pizzas']);
     }

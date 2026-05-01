@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-// PrimeNG
+
 import { MenubarModule } from 'primeng/menubar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -25,18 +25,18 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BadgeModule } from 'primeng/badge';
 
-// Services & Guards
+
 import { TokenInterceptor } from './services/token.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 
-// Components
+
 import { AppComponent } from './app.component';
 import { PizzaListComponent } from './pizzas/pizza-list.component';
 import { IngredientListComponent } from './ingredients/ingredient-list.component';
 import { LoginComponent } from './components/login/login.components';
 import { RegisterComponent } from './components/register/register.component';
 
-// Routes with Auth Guard
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
